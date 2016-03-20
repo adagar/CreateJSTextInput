@@ -56,5 +56,5 @@ Basic JavaScript usage:
 
 ## License
 
-[MIT License](https://opensource.org/licenses/MIT)
-
+[MIT License](https://opensource.org/licenses/MIT) 
+([https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT))
