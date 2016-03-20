@@ -76,7 +76,11 @@ class TextInput extends createjs.Container {
 
   _setupPlaceHolderText() {
     if (this._placeHolderText === null) {
-      this._placeHolderText = new createjs.Text(this.placeHolder, this._getFontStyle(), this.placeHolderTextColor);
+      this._placeHolderText = new createjs.Text(
+        this.placeHolder,
+        this._getFontStyle(),
+        this.placeHolderTextColor
+      );
       this._placeHolderText.y = this._placeHolderText.x = this._padding;
       this.addChild(this._placeHolderText);
     } else {
@@ -86,7 +90,11 @@ class TextInput extends createjs.Container {
 
   _setupVisibleText() {
     if (this._visiblePreCursorText === null) {
-      this._visiblePreCursorText = new createjs.Text(this._preCursorText, this._getFontStyle(), this.textColor);
+      this._visiblePreCursorText = new createjs.Text(
+        this._preCursorText,
+        this._getFontStyle(),
+        this.textColor
+      );
       this._visiblePreCursorText.y = this._visiblePreCursorText.x = this._padding;
       this.addChild(this._visiblePreCursorText);
     } else {
@@ -94,7 +102,11 @@ class TextInput extends createjs.Container {
     }
 
     if (this._visiblePostCursorText === null) {
-      this._visiblePostCursorText = new createjs.Text(this._postCursorText, this._getFontStyle(), this.textColor);
+      this._visiblePostCursorText = new createjs.Text(
+        this._postCursorText,
+        this._getFontStyle(),
+        this.textColor
+      );
       this._visiblePostCursorText.y = this._visiblePostCursorText.x = this._padding;
       this.addChild(this._visiblePostCursorText);
     } else {
@@ -105,7 +117,9 @@ class TextInput extends createjs.Container {
   _setupCursor() {
     if (this._cursor === null) {
       this._cursor = new createjs.Shape();
-      this._cursor.graphics.beginFill(this.cursorColor).drawRect(this._padding, this.fontSize * .25, this.cursorWidth, this.fontSize * 1.5);
+      this._cursor.graphics
+        .beginFill(this.cursorColor)
+        .drawRect(this._padding, this.fontSize * .25, this.cursorWidth, this.fontSize * 1.5);
       this._cursor.x = 0; // this will signify pure text offset
       this._cursor.visible = false;
       this.addChild(this._cursor);
@@ -142,7 +156,12 @@ class TextInput extends createjs.Container {
   }
 
   _click(localXY) {
-    this._focused = (localXY.x > 0 && localXY.y > 0 && localXY.x < this.width && localXY.y < this.height);
+    this._focused = (
+      localXY.x > 0 &&
+      localXY.y > 0 &&
+      localXY.x < this.width &&
+      localXY.y < this.height
+    );
     this._selectedDuration = 0;
 
     this._placeHolderText.visible = !this._focused && this._hiddenInput.value === "";
