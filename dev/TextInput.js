@@ -1,13 +1,14 @@
 /**
  * Created by Andrew on 3/19/16.
+ * Updated by Nick Garza on 10/17/2018
  */
 class TextInput extends createjs.Container {
   constructor() {
     super();
 
     // Field Settings
-    this.width = 200;
-    this.height = 40;
+    this.width = 60;
+    this.height = 30;
 
     // Text Settings
     this.placeHolder = '';
@@ -46,6 +47,8 @@ class TextInput extends createjs.Container {
   _setupDomNode() {
     this._hiddenInput = document.createElement('input');
     this._hiddenInput.type = 'text';
+    this._hiddenInput.size = '4';
+    this._hiddenInput.maxLength = '5';
     this._hiddenInput.style.display = 'none';
     this._hiddenInput.style.position = 'absolute';
     this._hiddenInput.style.zIndex = -100;
@@ -131,17 +134,19 @@ class TextInput extends createjs.Container {
   _setupListeners() {
     window.addEventListener('click', (e) => {
       // Page
-      const pX = e.pageX;
+      //coordinates of mouse click
+      const pX = e.pageX; 
       const pY = e.pageY;
       // Canvas
       if (this.stage === null) return;
-      const cX = this.stage.canvas.offsetLeft;
-      const cY = this.stage.canvas.offsetTop;
+      const cX = this.parent.stage.canvas.offsetLeft;
+      const cY = this.parent.stage.canvas.offsetTop;
       // Local
-      const lX = pX - cX - this.x;
-      const lY = pY - cY - this.y;
-
+      const lX = pX - cX - this.parent.x - this.x;
+      const lY = pY - cY - this.parent.y - this.y;
+      //console.log({x: lX, y: lY});
       this._click({x: lX, y: lY});
+      //this._click({x:0, y:0})
     });
     this._hiddenInput.addEventListener('input', (e) => {
       if (this._focused) {
@@ -184,8 +189,9 @@ class TextInput extends createjs.Container {
 
   _selectInput() {
     this._hiddenInput.style.display = 'block';
-    this._hiddenInput.style.left = (this.x + this.stage.canvas.offsetLeft + this._padding) + 'px';
-    this._hiddenInput.style.top = (this.y + this.stage.canvas.offsetTop + this._padding) + 'px';
+    //this._hiddenInput.style.visibility = 'hidden';
+    this._hiddenInput.style.left = (this.x + this.parent.stage.canvas.offsetLeft + this._padding + this.parent.x) + 'px';
+    this._hiddenInput.style.top = (this.y + this.parent.stage.canvas.offsetTop + this._padding + this.parent.y) + 'px';
     this._hiddenInput.focus();
   }
 
