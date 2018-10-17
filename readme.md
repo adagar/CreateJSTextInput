@@ -54,6 +54,31 @@ Basic JavaScript usage:
       stage.update();
     });
 
+Custom Width/Height and placeholder usage:
+
+    // Grab our canvas and setup the stage
+    const canvas = document.getElementById('canvasId');
+    const stage = new createjs.Stage(canvas);
+    
+    // Create and place our text field on the canvas
+    const newDimensions = {
+        height: 30,
+        width: 60
+    }
+    const textField = new TextInput(newDimensions, "Placeholder Text");
+    textField.y = textField.x = 100;
+    stage.addChild(textField);
+    
+    // Updates the text field to the new internal data (ie. placeholder)
+    // I may allow an optional internal data watcher, but I feel if there are a large amount of 
+    // fields this could become performance slow
+    textField.update();
+    
+    // Standard auto refresh
+    createjs.Ticker.on('tick', function () {
+      stage.update();
+    });
+
 ## License
 
 [MIT License](https://opensource.org/licenses/MIT) 
